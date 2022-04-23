@@ -7,36 +7,17 @@ import java.util.ArrayList;
 
 public class MarkdownParse {
 
-    public static int lastParen(String markdown) {
-        int lastParen = markdown.lastIndexOf(")");
-        return lastParen;
-    }
-
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
         while (currentIndex < markdown.length()) {
-            if (!markdown.contains("[") || !markdown.contains("]") || !markdown.contains("(")
-                    || !markdown.contains(")")) {
-                break;
-            }
             int openBracket = markdown.indexOf("[", currentIndex);
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
-            if (markdown.charAt(openBracket - 1) == '!') {
-                break;
-            }
-            if (closeBracket + 1 != openParen) {
-                break;
-            }
             toReturn.add(markdown.substring(openParen + 1, closeParen));
-            if (closeParen == MarkdownParse.lastParen(markdown)) {
-                break;
-            } else {
-                currentIndex = closeParen + 1;
-            }
+            currentIndex = closeParen + 1;
         }
 
         return toReturn;
