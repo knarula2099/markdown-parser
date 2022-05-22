@@ -69,4 +69,22 @@ public class MarkdownParseTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testLabReport2() throws IOException {
+        List<String> expected = Arrays.asList("`google.com", "google.com", "ucsd.edu");
+        Path fileName = Path.of("lab-report-test1.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> actual = MarkdownParse.getLinks(content);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testLabReport3() throws IOException {
+        List<String> expected = Arrays.asList("b.com", "a.com(())", "example.com");
+        Path fileName = Path.of("lab-report-test1.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> actual = MarkdownParse.getLinks(content);
+        assertEquals(expected, actual);
+    }
+
 }
