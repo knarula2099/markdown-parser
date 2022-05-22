@@ -71,8 +71,8 @@ public class MarkdownParseTest {
 
     @Test
     public void testLabReport2() throws IOException {
-        List<String> expected = Arrays.asList("`google.com", "google.com", "ucsd.edu");
-        Path fileName = Path.of("lab-report-test1.md");
+        List<String> expected = Arrays.asList("b.com", "a.com(())", "example.com");
+        Path fileName = Path.of("lab-report-test2.md");
         String content = Files.readString(fileName);
         ArrayList<String> actual = MarkdownParse.getLinks(content);
         assertEquals(expected, actual);
@@ -80,8 +80,9 @@ public class MarkdownParseTest {
 
     @Test
     public void testLabReport3() throws IOException {
-        List<String> expected = Arrays.asList("b.com", "a.com(())", "example.com");
-        Path fileName = Path.of("lab-report-test1.md");
+        List<String> expected = Arrays.asList("https://www.twitter.com",
+                "https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule", "https://cse.ucsd.edu/");
+        Path fileName = Path.of("lab-report-test3.md");
         String content = Files.readString(fileName);
         ArrayList<String> actual = MarkdownParse.getLinks(content);
         assertEquals(expected, actual);
